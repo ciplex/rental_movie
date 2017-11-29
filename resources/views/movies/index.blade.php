@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Movie')
+@section('title', 'movies')
 
 @section('content')
 
@@ -13,6 +13,7 @@
           </div>
         </div>
       </div>
+    </div>
   @endif
 
 <!-- <form method="GET" action=" {{ route('movie.search') }}" class="form-inline my-2 my-lg-0 ml-5">
@@ -38,10 +39,10 @@
       </div>
       </div>
      </div>
-      @endforeach
-      @stop
-    </div>
-    </div>
+     @endforeach
+    </div>{{ $movies->render() }}
+    @stop
+    
           <!-- <form method="POST" action="{{route('movie.destroy', $movie->id) }}" class="row no-gutters pb-2">
             <input type="hidden" name="_method" value="delete" />
             {{ csrf_field() }}
@@ -50,4 +51,4 @@
             <a class="btn btn-primary col-sm-12" href="{{ route('movie.edit', $movie->id) }}">Update</a>
         </tr> -->
     
- <!-- {{ $movies->render() }} -->
+ <!--   -->
