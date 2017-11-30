@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\movies;
+use App\Http\Requests\MoviesRequest;
 use Illuminate\Filesystem\Filesystem;
 use Intervention\Image\ImageManager;
+
 class MoviesController extends Controller
 {
     private $movies;
@@ -35,20 +37,20 @@ return view('movies.index', compact('movies'));
 
     public function store(MoviesController $request)
     {
-        // $movies = $request->except("poster");
-        // // cek jika upload photo
-        // if($request->hasFile('poster'))
-        // {
-        //  $movies['poster'] = $this->generatePhoto($request->file('poster'), $request->except('poster'));
-        // }
-        //  $this->movies->create($movies);
+        $movies = $request->except("poster");
+        // cek jika upload photo
+        if($request->hasFile('poster'))
+        {
+         $movies['poster'] = $this->generatePhoto($request->file('poster'), $request->except('poster'));
+        }
+         $this->movies->create($movies);
 
-                //   Movies::create([
-                //       'category_id' -> request('category_id'),
-                //       'title' -> request('title'),
-                //       'year' -> request('year'),
-                //       'description' -> request('description')
-                //       ]);
+                  Movies::create([
+                      'category_id' -> request('category_id'),
+                      'title' -> request('title'),
+                      'year' -> request('year'),
+                      'description' -> request('description')
+                      ]);
                
     }
 
@@ -67,7 +69,7 @@ return view('movies.index', compact('movies'));
     {
        $movie = $this->movie->find($id);
 
-        return view('movies.edit', compact('movies'));
+        return view('movies.edit', compact('admin'));
     }
 
   
@@ -102,6 +104,21 @@ return view('movies.index', compact('movies'));
         }
         return redirect()->back();
             
+    }
+
+    public function detail($id) {
+        $movies = $this->movie->find($id);
+        return view('movies.detail', compact('movies'));
+        
+    }
+
+    private function generatePhoto($poster, $data)
+    {
+        $filename = date('YmdHis').'-'.snake_case($data['name']).".".$this->filesystem->extension($photo->getCLientOriginalName());
+        $path = public_path("photos/").$filename;
+        
+        $this->imageManager->make($poster->getRealPath())->save($path);
+        return "/photos/".$filename;
     }
 
 }

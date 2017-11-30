@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class movies extends Model
 {
-    protected $fillable = ['category_id', 'title', 'year', 'description'];
+    protected $fillable = ['category_id', 'title', 'year', 'description', 'poster'];
 
     public function categories()
     {

@@ -17,16 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/movies', 'MoviesController@index');;
+Route::get('/admin', 'MoviesController@index');
 
-Route::get('/movies/search', ['uses' => 'MoviesController@search', 'as' => 'movie.search']);
+Route::get('/admin/search', ['uses' => 'MoviesController@search', 'as' => 'movies.search']);
 
-Route::get('/movies/create', ['uses' => 'MoviesController@create', 'as' => 'movie.create']);
+Route::get('/admin/create', ['uses' => 'MoviesController@create', 'as' => 'movies.create']);
 
-Route::post('/movies/create', ['uses' => 'MoviesController@store', 'as' => 'movie.store']);
+Route::post('/admin/create', ['uses' => 'MoviesController@store', 'as' => 'movies.store']);
 
-Route::get('/movies/destroy/{id}', ['uses' => 'MoviesController@destroy', 'as' => 'movie.destroy']);
+Route::get('/admin/destroy/{id}', ['uses' => 'MoviesController@destroy', 'as' => 'movies.destroy']);
 
-Route::get('/movies/edit/{id}', ['uses' => 'MoviesController@edit', 'as' => 'movie.edit']);
+Route::get('/admin/edit/{id}', ['uses' => 'MoviesController@edit', 'as' => 'movies.edit']);
 
-Route::put('/movies/update/{id}', ['uses' => 'MoviesController@update', 'as' => 'movie.update']);
+Route::get('/admin/detail/{id}', ['uses' => 'MoviesController@detail', 'as' => 'movies.detail']);
+
+Route::put('/admin/update/{id}', ['uses' => 'MoviesController@update', 'as' => 'movies.update']);
