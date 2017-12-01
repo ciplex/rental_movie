@@ -10,12 +10,8 @@ use Intervention\Image\ImageManager;
 
 class MoviesController extends Controller
 {
-    private $movies;
-    public function create()
-    {
-        return view('movies.create');
-    }
-    private $movie;
+   
+         private $movies;
     
         private $filesystem;
     
@@ -27,7 +23,7 @@ class MoviesController extends Controller
             $this->filesystem = $filesystem;
             $this->imageManager = $imageManager;
         }
-        
+       
 public function index()
 {
 $movies = $this->movie->with('categories')->orderBy('id', 'DESC')->paginate(10);
@@ -35,32 +31,32 @@ $movies = $this->movie->with('categories')->orderBy('id', 'DESC')->paginate(10);
 return view('movies.index', compact('movies'));
 }
 
-    public function store(MoviesController $request)
+public function create()
+{
+    return view('movies.create');
+}
+
+    public function store(MoviesRequest $request)
     {
-        $movies = $request->except("poster");
+        $movie = $request->except("poster");
         // cek jika upload photo
         if($request->hasFile('poster'))
         {
-         $movies['poster'] = $this->generatePhoto($request->file('poster'), $request->except('poster'));
+         $movie['poster'] = $this->generatePhoto($request->file('poster'), $request->except('poster'));
         }
-         $this->movies->create($movies);
+         $this->movie->create($movie);
 
-                  Movies::create([
-                      'category_id' -> request('category_id'),
-                      'title' -> request('title'),
-                      'year' -> request('year'),
-                      'description' -> request('description')
-                      ]);
-               
+         session()->flash('success_message', 'Data tersimpan');
+         return redirect('/admin');    
     }
 
     public function search(Request $request)
     {
        $keyword = $request->input('keyword');
        
-       $movies = $this->movie->where('category_id', 'LIKE', "%$keyword%")
+       $movie = $this->movie->where('category_id', 'LIKE', "%$keyword%")
             ->orderBy('id', 'DESC')->paginate();
-            $movies->appends(['keyword' => $keyword]);
+            $movie->appends(['keyword' => $keyword]);
 
             return view('movies.search', compact('movies'));
     }
@@ -96,25 +92,25 @@ return view('movies.index', compact('movies'));
 
     public function destroy($id)
     {
-        $movies = $this->movies->find($id);
+        $movie = $this->movie->find($id);
 
-        if($movies) 
+        if($movie) 
         {
-            $movies->delete();
+            $movie->delete();
         }
         return redirect()->back();
             
     }
 
     public function detail($id) {
-        $movies = $this->movie->find($id);
+        $movie = $this->movie->find($id);
         return view('movies.detail', compact('movies'));
         
     }
 
     private function generatePhoto($poster, $data)
     {
-        $filename = date('YmdHis').'-'.snake_case($data['name']).".".$this->filesystem->extension($photo->getCLientOriginalName());
+        $filename = date('YmdHis').'-'.snake_case($data['title']).".".$this->filesystem->extension($poster->getCLientOriginalName());
         $path = public_path("photos/").$filename;
         
         $this->imageManager->make($poster->getRealPath())->save($path);

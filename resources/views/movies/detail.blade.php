@@ -19,7 +19,7 @@
 
     <div class="row">
       <div class="col-12 col-md-3">
-      @if($movies->photo)
+      @if($movie->photo)
       <img src="{{ $movies->photo }}">
       @else
       <img src="/photos/no-avatar.png" width="100%" height="150px">

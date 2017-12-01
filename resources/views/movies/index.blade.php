@@ -46,13 +46,6 @@
       </div>
      </div>
      @endforeach
-    </div>{{ $movies->render() }}
+    </div>
     @stop
-    
-          <!-- <form method="POST" action="{{route('movies.destroy', $movie->id) }}" class="row no-gutters pb-2">
-            <input type="hidden" name="_method" value="delete" />
-            {{ csrf_field() }}
-            <button type="submit" onclick="return confirm('Hapus {{ $movie->category }} ?')" class="btn btn-danger col-sm-12">Delete</button>
-          </form>    
-            <a class="btn btn-primary col-sm-12" href="{{ route('movies.edit', $movie->id) }}">Update</a>
-        </tr> -->
+  
