@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class movies extends Model
 {
-    protected $fillable = ['category_id', 'title', 'year', 'description', 'poster'];
+    protected $fillable = ['category_id', 'title', 'actor', 'year', 'description', 'poster'];
 
-    public function categories()
+    public function categoryclass()
     {
-        return $this->belongsTo(\App\categories::class, 'category_id');
+        return $this->belongsTo(\App\categoryclass::class, 'category_id');
     }
 }
+?>

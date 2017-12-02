@@ -24,7 +24,7 @@
   </div>
 </nav>
 <div class="container">
-<div class="row p-5">
+<div class="row px-2 py-5">
 @yield('content')
 </div>
 </div>

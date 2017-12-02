@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/admin', 'MoviesController@index');
 
+Route::get('Customers/', 'MoviesController@customers');
+
+Route::get('/admin/detail/{id}', ['uses' => 'MoviesController@detail', 'as' => 'movies.detail']);
+
 Route::get('/admin/search', ['uses' => 'MoviesController@search', 'as' => 'movies.search']);
 
 Route::get('/admin/create', ['uses' => 'MoviesController@create', 'as' => 'movies.create']);
@@ -29,6 +33,6 @@ Route::get('/admin/destroy/{id}', ['uses' => 'MoviesController@destroy', 'as' =>
 
 Route::get('/admin/edit/{id}', ['uses' => 'MoviesController@edit', 'as' => 'movies.edit']);
 
-Route::get('/admin/detail/{id}', ['uses' => 'MoviesController@detail', 'as' => 'movies.detail']);
+
 
 Route::put('/admin/update/{id}', ['uses' => 'MoviesController@update', 'as' => 'movies.update']);

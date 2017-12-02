@@ -21,6 +21,11 @@
           <p style="color: red">{{ $errors->first('address') }}</p>
         @endif  --}}
   </div>
+
+  <div class="form-group">
+    <label for="input">Actor</label>
+    <input type="text" name="title" class="form-control" placeholder="Enter Actor">
+  
   <div class="form-group">
     <label for="input">Year</label>
     <select class="form-control form-control-default" name="year">

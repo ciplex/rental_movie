@@ -11,7 +11,7 @@ use Intervention\Image\ImageManager;
 class MoviesController extends Controller
 {
    
-         private $movies;
+         private $movie;
     
         private $filesystem;
     
@@ -26,9 +26,16 @@ class MoviesController extends Controller
        
 public function index()
 {
-$movies = $this->movie->with('categories')->orderBy('id', 'DESC')->paginate(10);
+$movies = $this->movie->with('categoryclass')->orderBy('id', 'DESC')->paginate(10);
 
 return view('movies.index', compact('movies'));
+}
+
+public function customers()
+{
+$movies = $this->movie->with('categoryclass')->orderBy('id', 'DESC')->paginate(10);
+
+return view('movies.customer', compact('movies'));
 }
 
 public function create()
@@ -104,7 +111,7 @@ public function create()
 
     public function detail($id) {
         $movie = $this->movie->find($id);
-        return view('movies.detail', compact('movies'));
+        return view('movies.detail', compact('movie'));
         
     }
 
