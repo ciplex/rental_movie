@@ -105,8 +105,9 @@ public function create()
         {
             $movie->delete();
         }
-        return redirect()->back();
-            
+      
+        return redirect('/admin');  
+
     }
 
     public function detail($id) {

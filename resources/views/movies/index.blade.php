@@ -28,7 +28,6 @@
   <thead>
     <tr>
     <th scope="col">No</th>
-    <th scope="col">Actor</th>
     <th scope="col">Title</th>
     <th scope="col">CategoryID</th>
     <th scope="col">Year</th>
@@ -41,9 +40,8 @@
   @foreach($movies as $movie)
     <tr>
         <td>{{ $movie->id }}</td>
-        <td>{{ $movie->actor }}</td>
         <td>{{ $movie->title }}</td>
-        <td>{{ $movie->category_id }}</td>
+        <td>{{ $movie->categoryclass->name }}</td>
         <td>{{ $movie->year }}</td>
         <td>{{ $movie->description }}</td>
         <td>
@@ -62,12 +60,12 @@
                     <form method="POST" action="{{route('movies.destroy', $movie->id) }}">
                             <input type="hidden" name="_method" value="delete" />
                             {{ csrf_field() }}
-                            <button type="submit" onclick="return confirm('Delete {{ $movie->category_id }} ?')" class="btn btn-danger px-3">Delete</button>
+                            <button type="submit" onclick="return confirm('Delete {{ $movie->title }} ?')" class="btn btn-danger px-3">Delete</button>
                           </form> 
             </div>
         </tr>
     @endforeach
   </tbody>
 </table>
- {{ $movies->render() }}
+ {{ $movies->links("movies/pagination") }}
 @stop

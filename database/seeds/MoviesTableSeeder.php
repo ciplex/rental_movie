@@ -20,7 +20,6 @@ class MoviesTableSeeder extends Seeder
             DB::table('movies')->insert([       /* DB database class */
                 'category_id' =>$faker->randomElement($dataCategory),
                 'title' => $faker->word,
-                'actor' => $faker->name,
                 'year' => rand(2000, 2020),
                 'description' => $faker->text
             ]);

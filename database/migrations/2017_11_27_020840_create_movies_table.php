@@ -17,12 +17,16 @@ class CreateMoviesTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->string('title');
-            $table->string('actor');
             $table->integer('year');
             $table->text('description');
             $table->string('poster')->nullable();
             $table->timestamps();
            
+        });
+
+        Schema::table('movies', function(Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('categories')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
        
     }

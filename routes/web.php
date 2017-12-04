@@ -29,10 +29,8 @@ Route::get('/admin/create', ['uses' => 'MoviesController@create', 'as' => 'movie
 
 Route::post('/admin/create', ['uses' => 'MoviesController@store', 'as' => 'movies.store']);
 
-Route::get('/admin/destroy/{id}', ['uses' => 'MoviesController@destroy', 'as' => 'movies.destroy']);
+Route::delete('/admin/destroy/{id}', ['uses' => 'MoviesController@destroy', 'as' => 'movies.destroy']);
 
 Route::get('/admin/edit/{id}', ['uses' => 'MoviesController@edit', 'as' => 'movies.edit']);
-
-
 
 Route::put('/admin/update/{id}', ['uses' => 'MoviesController@update', 'as' => 'movies.update']);
